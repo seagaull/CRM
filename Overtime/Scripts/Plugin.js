@@ -1,11 +1,16 @@
 ﻿$(document).ready(function () {
     
-    $(".btn-group").on("click", "a[data-post]", function (e) {
+
+
+    // دة المفروض انا عملوا ديليجيشن عشان يقدر ياتاش على اى كنترول اون فلاى 
+
+    $(document).on("click", "a[data-post]", function (e) {
         e.preventDefault();
         var btn = $(this);
         var message = $(this).data("post");
         if (!confirm(message))
-            return;   
+            return;
+        //هنا بيعملى فورم و بيعمل الميثود بتاعتها بوست 
         $("<form>")
             .attr("method", "post")
             .attr("action", btn.attr("href"))

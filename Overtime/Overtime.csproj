@@ -183,6 +183,7 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\StaffPosition.cs" />
     <Compile Include="Models\User.cs" />
+    <Content Include="Notes\text.txt" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
   </ItemGroup>

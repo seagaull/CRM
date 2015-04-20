@@ -1,0 +1,18 @@
+﻿    $(document).on('click', 'a .error', function() {
+
+       
+        var Json = {}
+        Json.BranID = $(this).attr('data-id')
+        var btn = $(this);
+        if (confirm('are you sure to delete') == true) {
+            $.post('/admin/Branches/DeleteBran/', Json, function (response) {
+
+                if (response == true) {
+                    btn.parent().parent().parent().remove();
+                } else {
+                    alert('error')
+                }
+            })
+        }
+       
+    })

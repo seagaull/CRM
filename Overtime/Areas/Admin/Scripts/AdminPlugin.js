@@ -11,6 +11,7 @@
 
         $("#ddlBanks").html(items);
     });
+
     var temp = $(".template").hide().clone();;
     $("#ddlBanks").change( function () {
         $.getJSON("/admin/Branches/Branches/" + $("#ddlBanks >option:selected").attr("value"),
@@ -20,13 +21,11 @@
 
                     var items = (temp.removeClass("template")
                         .find(".ids").text(branch.Id).end()
-                        .find(".name").text(branch.Name).end()
-                        
+                        .find(".name").text(branch.Name).end()                       
                         .find(".address").text(branch.Address).end()
                         .find(".EditTemp").attr("href", "/admin/Branches/Form/" + branch.Id).end()
-                        .find(".DeleteTemp")
-                         
-                        .attr("href", "/admin/Branches/Delete/" + branch.Id).end()
+                        .find(".DeleteTemp").attr("href", "/admin/Branches/Delete/" + branch.Id).end()
+                        
                         .html());
 
                     $("#datatable").append("<tr class='cloned'>" + items + "</tr>");
@@ -42,8 +41,10 @@
 
     });
 
-  
 
+
+
+        
 
 
 });
