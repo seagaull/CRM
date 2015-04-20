@@ -1,0 +1,26 @@
+﻿@model Overtime.Areas.Admin.ViewModel.FormVm
+
+
+<h2><i class="fa fa-stethoscope"></i>  @(Model.IsNew ? "قسم جديد" : "تعديل قسم")</h2>
+
+
+@using (Html.BeginForm("Create", "Departments"))
+{
+if (!Model.IsNew)
+ {
+     <input name="Id" type="hidden" value="@Model.Id"/>
+ }
+    @Html.ValidationSummary()
+    <div class=" form-group form-group-sm">
+
+        <div class="form-group form-horizontal">
+            @Html.LabelFor(x => x.Name, new {@class = "control-label col-xs-1"})
+            @Html.TextBoxFor(x => x.Name, new {@class = "form-control col-xs-3 "})
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <input type="submit" class="btn btn-success col-lg-offset-2"
+           value="@(Model.IsNew ? "أدخال " : "تعديل")"/>
+    <a href="@Url.Action("index", "Home", new {area = "admin"})">رجوع</a>
+}

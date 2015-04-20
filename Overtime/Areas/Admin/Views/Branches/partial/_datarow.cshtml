@@ -1,0 +1,55 @@
+﻿@model Overtime.Areas.Admin.ViewModel.BranchVM
+<tr>
+    <td>
+        @Model.Address
+    </td>
+    <td>
+        @Model.Name
+    </td>
+    <td>
+        @Model.Id
+    </td>
+    <td>
+        <div class="btn-group btn-group-xs  ">
+            <a href="@Url.Action("Edit", "Banks", new { id = @Model.Id, area = "admin" })" class="btn btn-primary ">
+
+
+                <span class="fa fa-pencil"></span> تعديل
+            </a>
+            @*@if (!item.IsDeleted)
+                {
+                    <div class="btn-group btn-group-xs">
+                        <a href="@Url.Action("trash", "Banks", new {id = item.Id})"
+                           class="btn btn-danger"
+                           data-post="هل تريد ألغاء الدرجة @item.Name">
+                            سلة المهملات <i class="fa fa-trash"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger dropdown-toggle"
+                           data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu ">
+                            <li>
+                                <a href="@Url.Action("delete", "Banks", new {id = item.Id})" data-post="هل تريد حذف الدرجة حذف نهائى ؟!!">
+                                    <i class="fa fa-remove"></i>
+                                    حذف
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                }*@
+            @*else
+            {
+            <a href="@Url.Action("restore", "Banks", new {id = item.Id})"
+               class="btn btn-success"
+               data-post>
+                أعادة القسم <i class="fa fa-retweet"></i>
+            </a>
+
+            }*@
+        </div>
+
+
+    </td>
+</tr>

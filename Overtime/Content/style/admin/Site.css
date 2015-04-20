@@ -1,0 +1,23 @@
+﻿body {
+
+}
+.selected {
+   
+   
+    
+  
+}
+.selected a {
+    
+     background: #d9edf7;
+    border-left-color: #3a87ad;
+}
+.selected:before {
+
+    content: "";
+    border: 10px solid transparent;
+
+}
+.side-menu {
+    margin-top: 40px;
+}

@@ -1,0 +1,69 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @Html.ActionLink("كلية الطب ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
+
+        </div>
+        <div class="navbar-collapse collapse pull-right">
+            <ul class="nav navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li>
+                        <a href="@Url.Action("Index", "Departments")">
+
+                            الأقسام
+                            <i class ="fa fa-beer"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index", "Positions")">
+                            الدرجات العلمية
+                            <i class="fa fa-magic"></i>
+                        </a>
+                    </li>
+                    var list = new List<string> { "admin", "moderator" };
+                    if (User.IsInRole("admin")|User.IsInRole("moderator"))
+                    
+                   
+                
+                    {
+                        <li> <a href="@Url.Action("Index", "Users")">
+
+                            المستخدمين
+                            <i class="fa fa-user"></i>
+                        </a></li>
+                    }
+
+                
+
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                                بنوك <span class="caret"></span>
+
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index","Banks")"> بنوك <i class="fa fa-bank"></i> </a></li>
+                                <li><a href="@Url.Action("Index","Branches")#"> فروع   <i class="fa fa-briefcase"></i> </a></li>
+                            </ul>
+
+                        </li>
+
+                  
+                    <li> <a href="@Url.RouteUrl("Logout")">خروج</a></li>
+
+
+                }
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>

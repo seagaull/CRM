@@ -1,0 +1,54 @@
+﻿@using System.Web.Optimization
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>_Layout</title>
+    @Styles.Render("~/styles")
+    @Styles.Render("~/style/back")
+</head>
+<body>
+
+    @Html.Partial("Partial/_navbar")
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-3">
+                <div class="panel panel-primary side-menu">
+                    <div class="panel-heading ">
+                         أهلا بك : 
+                        <i class="fa fa-user"></i> @User.Identity.Name
+                    </div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item">أعدادات المستخدمين</a>
+
+
+                        <a href="#" class="list-group-item">تعديل كلمة المرور </a>
+
+                        <a href="@Url.RouteUrl("logout")" class="list-group-item">خروج</a>
+
+                    </div>
+
+                </div>
+             
+            </div>
+            <div class="col-lg-9">
+                @RenderBody()
+            </div>
+           
+            <div class="col-lg-12">
+
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
+        </div>
+     
+    </div>
+    @Scripts.Render("~/scripts")
+    @Scripts.Render("~/admin/scripts")
+
+</body>
+</html>

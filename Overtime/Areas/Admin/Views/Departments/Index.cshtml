@@ -1,0 +1,87 @@
+﻿@model  Overtime.Areas.Admin.ViewModel.DepartmentIndex
+
+
+
+
+<div>
+    <a href="@Url.Action("Create","Departments",new{area="admin"})" class="btn btn-primary  pull-left">قسم جديد <i class="fa fa-plus"></i></a>
+</div>
+
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <td colspan="4">
+
+                @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
+
+            </td>
+        </tr>
+        <tr>
+            <th>القسم</th>
+            <th>أنشىء بواسطة</th>
+            <th>أنشىء فى </th>
+            <th>عمليات </th>
+        </tr>
+
+    </thead>
+    @foreach (var department in Model.Departments)
+    {
+        <tr>
+            <td>
+                @department.Name
+            </td>
+            <td>
+                @department.CreatedBy
+            </td>
+            <td>
+                @department.CreatedTime.ToShortDateString()
+            </td>
+            <td>
+                <div class="btn-group btn-group-xs  ">
+                    <a href="@Url.Action("Edit", "Departments", new {id = @department.Id, area = "admin"})" class="btn btn-primary ">
+
+
+                        <span class="fa fa-pencil"></span> تعديل
+                    </a>
+                @if (!department.IsDeleted)
+                {
+                    <div class="btn-group btn-group-xs">
+                        <a href="@Url.Action("trash", "Departments", new {id = department.Id})"
+                           class="btn btn-danger"
+                           data-post="هل تريد ألغاء قسم @department.Name">
+                            سلة المهملات <i class="fa fa-trash"></i>
+                        </a>
+                        <a href="#" class="btn btn-danger dropdown-toggle"
+                           data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li >
+                                <a href="@Url.Action("delete", "Departments", new {id = department.Id})" data-post="هل تريد حذف القسم حذف نهائى ؟!!">
+                                    <i class="fa fa-remove"></i>
+                                    حذف
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                }
+                else
+                {
+                    <a href="@Url.Action("restore", "Departments", new {id = department.Id})"
+                       class="btn btn-success"
+                       data-post>
+                        أعادة القسم <i class="fa fa-retweet"></i>
+                    </a>
+
+                }
+                </div>
+
+
+            </td>
+        </tr>
+
+    }
+</table>
