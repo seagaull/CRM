@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
 namespace Overtime.Models
 {
-    public class Position:AbstractData
+    public class SubPosition:AbstractData
     {
-        public virtual ICollection<SubPosition> SubPositions { get; set; }
-
-       
+        public int PositionId { get; set; } 
+        public virtual Position Position { get; set; }
+        public virtual ICollection<StaffPosition> Staff { get; set; }
 
     }
 
-    public class PositionMapping : EntityTypeConfiguration<Position>
+    public class SubPositionMapping : EntityTypeConfiguration<SubPosition>
     {
-        public PositionMapping()
+        public SubPositionMapping()
         {
-            this.ToTable("tbl_Positions")
+            this.ToTable("tbl_SubPositions")
                 .HasKey(x => x.Id)
                 .Property(x => x.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
@@ -29,18 +28,12 @@ namespace Overtime.Models
             this.Property(x => x.CreatedTime).IsRequired();
             this.Property(x => x.ModifiedTime).IsOptional();
             this.Property(x => x.DeletedTime).IsOptional();
-           
 
 
-
-            this.Property(x => x.Name)
-                .HasColumnType("nvarchar")
-                .HasMaxLength(256);
-           
-
-           
-
+          
 
         }
+
+
     }
 }

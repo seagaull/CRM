@@ -1,22 +1,32 @@
-﻿@model Overtime.Areas.Admin.ViewModel.BranchVM
-<tr>
-    <td>
-        @Model.Address
-    </td>
-    <td>
-        @Model.Name
-    </td>
-    <td>
-        @Model.Id
-    </td>
-    <td>
-        <div class="btn-group btn-group-xs  ">
-            <a href="@Url.Action("Edit", "Banks", new { id = @Model.Id, area = "admin" })" class="btn btn-primary ">
+﻿@using Overtime.Areas.Admin.ViewModel
+@model BranchIndexVM
+
+@foreach (var branch in Model.Branches)
+{
+    <tr>
+        <td>
+            @branch.Id
+        </td>
+        <td>
+            @branch.Name
+        </td>
+        <td>
+            @branch.BankId
+        </td>
+        <td>
+            <div class="btn-group btn-group-xs  ">
+                <a href="@Url.Action("Edit", "Branches", new {id = @branch.Id, area = "admin"})" class="btn btn-primary ">
 
 
-                <span class="fa fa-pencil"></span> تعديل
-            </a>
-            @*@if (!item.IsDeleted)
+                    <span class="fa fa-pencil"></span> تعديل
+                </a>
+                <a href="@Url.Action("delete", "Branches", new {id = @branch.Id})" data-post="هل تريد حذف الدرجة حذف نهائى ؟!!" class="btn btn-danger">
+                    <i class="fa fa-remove"></i>
+                    حذف
+                </a>
+
+
+                @*@if (!item.IsDeleted)
                 {
                     <div class="btn-group btn-group-xs">
                         <a href="@Url.Action("trash", "Banks", new {id = item.Id})"
@@ -39,7 +49,7 @@
 
                     </div>
                 }*@
-            @*else
+                @*else
             {
             <a href="@Url.Action("restore", "Banks", new {id = item.Id})"
                class="btn btn-success"
@@ -48,8 +58,9 @@
             </a>
 
             }*@
-        </div>
+            </div>
 
 
-    </td>
-</tr>
+        </td>
+    </tr>
+}

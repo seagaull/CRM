@@ -12,12 +12,9 @@ namespace Overtime.Models
    
         public int Code { get; set; }
         public int DepartmentId { get; set; }
-
-
-
         public int BankBranchId { get; set; }
         public virtual BankStaffsDetails StaffDetails { get; set; }
-        public virtual ICollection<StaffPosition> Position { get; set; }
+        public virtual ICollection<StaffPosition> SubPositions { get; set; }
         public virtual  Department Department { get; set; }
     }
 

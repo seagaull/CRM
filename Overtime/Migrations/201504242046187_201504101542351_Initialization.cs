@@ -3,7 +3,7 @@ namespace Overtime.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initialization : DbMigration
+    public partial class _201504101542351_Initialization : DbMigration
     {
         public override void Up()
         {
@@ -13,7 +13,7 @@ namespace Overtime.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(maxLength: 350),
-                        CreatedBy = c.Int(nullable: false),
+                        CreatedBy = c.String(nullable: false),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -28,7 +28,7 @@ namespace Overtime.Migrations
                         BankAddress = c.String(),
                         BankId = c.Int(nullable: false),
                         Name = c.String(),
-                        CreatedBy = c.Int(nullable: false),
+                        CreatedBy = c.String(nullable: false),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -61,7 +61,7 @@ namespace Overtime.Migrations
                         DepartmentId = c.Int(nullable: false),
                         BankBranchId = c.Int(nullable: false),
                         Name = c.String(nullable: false, maxLength: 256),
-                        CreatedBy = c.Int(nullable: false),
+                        CreatedBy = c.String(nullable: false),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -76,7 +76,7 @@ namespace Overtime.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(maxLength: 256),
-                        CreatedBy = c.Int(nullable: false),
+                        CreatedBy = c.String(nullable: false),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -92,10 +92,26 @@ namespace Overtime.Migrations
                         StartDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.PositionId, t.StaffId })
-                .ForeignKey("dbo.tbl_Positions", t => t.PositionId, cascadeDelete: true)
                 .ForeignKey("dbo.tbl_Staffs", t => t.StaffId, cascadeDelete: true)
+                .ForeignKey("dbo.SubPositions", t => t.PositionId, cascadeDelete: true)
                 .Index(t => t.PositionId)
                 .Index(t => t.StaffId);
+            
+            CreateTable(
+                "dbo.SubPositions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        PositionId = c.Int(nullable: false),
+                        Name = c.String(),
+                        CreatedBy = c.String(),
+                        CreatedTime = c.DateTime(nullable: false),
+                        ModifiedTime = c.DateTime(),
+                        DeletedTime = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.tbl_Positions", t => t.PositionId, cascadeDelete: true)
+                .Index(t => t.PositionId);
             
             CreateTable(
                 "dbo.tbl_Positions",
@@ -103,7 +119,7 @@ namespace Overtime.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(maxLength: 256),
-                        CreatedBy = c.Int(nullable: false),
+                        CreatedBy = c.String(nullable: false),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -116,6 +132,10 @@ namespace Overtime.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false, maxLength: 128),
+                        CreatedBy = c.String(nullable: false),
+                        CreatedTime = c.DateTime(nullable: false),
+                        ModifiedTime = c.DateTime(),
+                        DeletedTime = c.DateTime(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -124,10 +144,9 @@ namespace Overtime.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Username = c.String(nullable: false, maxLength: 128),
                         Passwordhash = c.String(nullable: false, maxLength: 256),
                         Name = c.String(),
-                        CreatedBy = c.Int(),
+                        CreatedBy = c.String(),
                         CreatedTime = c.DateTime(nullable: false),
                         ModifiedTime = c.DateTime(),
                         DeletedTime = c.DateTime(),
@@ -155,12 +174,14 @@ namespace Overtime.Migrations
             DropForeignKey("dbo.tbl_UsersRole", "UserId", "dbo.tbl_Users");
             DropForeignKey("dbo.tbl_BankBranches", "BankId", "dbo.tbl_Banks");
             DropForeignKey("dbo.tbl_BankStaffDetails", "BranchId", "dbo.tbl_BankBranches");
-            DropForeignKey("dbo.tbl_BankStaffDetails", "Id", "dbo.tbl_Staffs");
+            DropForeignKey("dbo.tbl_StaffPositions", "PositionId", "dbo.SubPositions");
+            DropForeignKey("dbo.SubPositions", "PositionId", "dbo.tbl_Positions");
             DropForeignKey("dbo.tbl_StaffPositions", "StaffId", "dbo.tbl_Staffs");
-            DropForeignKey("dbo.tbl_StaffPositions", "PositionId", "dbo.tbl_Positions");
+            DropForeignKey("dbo.tbl_BankStaffDetails", "Id", "dbo.tbl_Staffs");
             DropForeignKey("dbo.tbl_Staffs", "DepartmentId", "dbo.tbl_Departments");
             DropIndex("dbo.tbl_UsersRole", new[] { "RoleId" });
             DropIndex("dbo.tbl_UsersRole", new[] { "UserId" });
+            DropIndex("dbo.SubPositions", new[] { "PositionId" });
             DropIndex("dbo.tbl_StaffPositions", new[] { "StaffId" });
             DropIndex("dbo.tbl_StaffPositions", new[] { "PositionId" });
             DropIndex("dbo.tbl_Staffs", new[] { "DepartmentId" });
@@ -171,6 +192,7 @@ namespace Overtime.Migrations
             DropTable("dbo.tbl_Users");
             DropTable("dbo.tbl_Roles");
             DropTable("dbo.tbl_Positions");
+            DropTable("dbo.SubPositions");
             DropTable("dbo.tbl_StaffPositions");
             DropTable("dbo.tbl_Departments");
             DropTable("dbo.tbl_Staffs");

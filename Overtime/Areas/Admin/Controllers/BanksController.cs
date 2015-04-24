@@ -118,7 +118,7 @@ namespace Overtime.Areas.Admin.Controllers
                 return HttpNotFound();
             _db.Banks.Remove(bank);
             _db.SaveChanges();
-            return RedirectToAction("index");
+            return Json(new {Success=true});
         } 
     }
 }

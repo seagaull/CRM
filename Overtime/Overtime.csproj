@@ -158,17 +158,10 @@
     <Compile Include="Infrastructure\Paggination.cs" />
     <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Infrastructure\Test.cs" />
-    <Compile Include="Migrations\201504101542351_Initialization.cs" />
-    <Compile Include="Migrations\201504101542351_Initialization.Designer.cs">
-      <DependentUpon>201504101542351_Initialization.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504101637495_001_UserRoles.cs" />
-    <Compile Include="Migrations\201504101637495_001_UserRoles.Designer.cs">
-      <DependentUpon>201504101637495_001_UserRoles.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504101909364_003-submitChanges.cs" />
-    <Compile Include="Migrations\201504101909364_003-submitChanges.Designer.cs">
-      <DependentUpon>201504101909364_003-submitChanges.cs</DependentUpon>
+    <Content Include="Migrations\CodeFile1.txt" />
+    <Compile Include="Migrations\201504242046187_201504101542351_Initialization.cs" />
+    <Compile Include="Migrations\201504242046187_201504101542351_Initialization.Designer.cs">
+      <DependentUpon>201504242046187_201504101542351_Initialization.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AbstractData.cs" />
@@ -182,6 +175,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\StaffPosition.cs" />
+    <Compile Include="Models\SubPosition.cs" />
     <Compile Include="Models\User.cs" />
     <Content Include="Notes\text.txt" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -232,6 +226,7 @@
     <Content Include="Areas\Admin\Views\Users\ResetPassword.cshtml" />
     <Content Include="Areas\Admin\Views\Branches\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Branches\partial\_datarow.cshtml" />
+    <Content Include="Areas\Admin\Views\Branches\Form.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -278,14 +273,8 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201504101542351_Initialization.resx">
-      <DependentUpon>201504101542351_Initialization.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504101637495_001_UserRoles.resx">
-      <DependentUpon>201504101637495_001_UserRoles.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504101909364_003-submitChanges.resx">
-      <DependentUpon>201504101909364_003-submitChanges.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504242046187_201504101542351_Initialization.resx">
+      <DependentUpon>201504242046187_201504101542351_Initialization.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

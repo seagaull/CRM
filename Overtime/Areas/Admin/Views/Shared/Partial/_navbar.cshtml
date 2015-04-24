@@ -17,44 +17,48 @@
                         <a href="@Url.Action("Index", "Departments")">
 
                             الأقسام
-                            <i class ="fa fa-beer"></i>
+                            <i class="fa fa-beer"></i>
                         </a>
                     </li>
 
-                    <li>
-                        <a href="@Url.Action("Index", "Positions")">
-                            الدرجات العلمية
-                            <i class="fa fa-magic"></i>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            الوظائف <span class="caret"></span>
+
                         </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index","Positions")"> وظائف <i class="fa fa-bitbucket"></i> </a></li>
+                            <li><a href="@Url.Action("Index","Branches")#"> درجات   <i class="fa fa-bookmark"></i> </a></li>
+                        </ul>
+
                     </li>
                     var list = new List<string> { "admin", "moderator" };
-                    if (User.IsInRole("admin")|User.IsInRole("moderator"))
-                    
-                   
-                
+                    if (User.IsInRole("admin") | User.IsInRole("moderator"))
                     {
-                        <li> <a href="@Url.Action("Index", "Users")">
+                        <li>
+                            <a href="@Url.Action("Index", "Users")">
 
-                            المستخدمين
-                            <i class="fa fa-user"></i>
-                        </a></li>
+                                المستخدمين
+                                <i class="fa fa-user"></i>
+                            </a>
+                        </li>
                     }
 
-                
 
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                                بنوك <span class="caret"></span>
 
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="@Url.Action("Index","Banks")"> بنوك <i class="fa fa-bank"></i> </a></li>
-                                <li><a href="@Url.Action("Index","Branches")#"> فروع   <i class="fa fa-briefcase"></i> </a></li>
-                            </ul>
+                    <li class="dropdown">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                            بنوك <span class="caret"></span>
 
-                        </li>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index","Banks")"> بنوك <i class="fa fa-bank"></i> </a></li>
+                            <li><a href="@Url.Action("Index","Branches")#"> فروع   <i class="fa fa-briefcase"></i> </a></li>
+                        </ul>
 
-                  
+                    </li>
+
+
                     <li> <a href="@Url.RouteUrl("Logout")">خروج</a></li>
 
 

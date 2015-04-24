@@ -106,7 +106,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             position.DeletedTime = null;
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { trashed = true });
         }
 
         [HttpPost]
@@ -117,7 +117,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             _db.Positions.Remove(position);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
     }
 }

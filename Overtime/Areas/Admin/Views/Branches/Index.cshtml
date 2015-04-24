@@ -1,59 +1,99 @@
-﻿
-@model Overtime.Areas.Admin.ViewModel.BranchIndexVM
+﻿@model Overtime.Areas.Admin.ViewModel.BranchIndexVM
 
 
 
-<select id="ddlBanks"  name="ddlBanks" ></select>
-<a href="@Url.Action("Branches", "Create")" class="btn btn-primary btn-lg  pull-left">
+@*<select id="ddlBanks"  name="ddlBanks" ></select>*@
+@Html.DropDownListFor(x=>x.Selected, new SelectList(@Model.Banks, "Id", "Name"),"اختار الفرع",
+new { id = "ddlBank" })
+<a href="@Url.Action("Create", "Branches")" class="btn btn-primary btn-lg  pull-left">
     <i class="fa fa-plus"></i>
-  فرع جديد
+    فرع جديد
 </a>
 <div>
     <table class="table table-striped">
         <thead>
-        <tr>
-            <td colspan="4">
+            <tr>
+                <td colspan="4">
 
-                @*@Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)*@
+                    @*@Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)*@
 
-            </td>
-        </tr>
+                </td>
+            </tr>
         <tr>
+            <th>كود الفرع </th>
             <th>أسم الفرع </th>
             <th>أنشىء بواسطة</th>
-            <th>عنوان الفرع </th>
+    
             <th>عمليات</th>
-         
+
         </tr>
 
         </thead>
 
-        <tbody id="datatable">
+        <tbody id="myTable">
+
         <tr class="template">
-            <td class="name"> </td>
             <td class="ids"></td>
-            <td class="address"> </td>
-            <td class="opertation">
-                <div class="btn-group btn-group-xs">
-                    <a href="#" class="btn-primary btn EditTemp" >
-                        تعديل
-                        <i class="fa fa-edit"></i>
+            <td class="name"></td>
+            <td class="createdBy"></td>
+            
+          
+
+           
+            <td>
+                <div class="btn-group btn-group-xs  ">
+                    <a class="btn btn-primary btn-edit">
+
+
+                        <span class="fa fa-pencil"></span> تعديل
                     </a>
-                    <a   class="btn-danger btn DeleteTemp" data-post="هل تريد التعديل">
-                        حذف
+                    <a class="btn btn-danger btn-delete">
                         <i class="fa fa-remove"></i>
+                        حذف
                     </a>
+                    @*@if (!department.IsDeleted)
+                            {
+                                <div class="btn-group btn-group-xs">
+                                    <a href="@Url.Action("trash", "Departments", new {id = department.Id})"
+                                       class="btn btn-danger"
+                                       data-post="هل تريد ألغاء قسم @department.Name">
+                                        سلة المهملات <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger dropdown-toggle"
+                                       data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="@Url.Action("delete", "Departments", new {id = department.Id})" data-post="هل تريد حذف القسم حذف نهائى ؟!!">
+                                                <i class="fa fa-remove"></i>
+                                                حذف
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("restore", "Departments", new {id = department.Id})"
+                                   class="btn btn-success"
+                                   data-post>
+                                    أعادة القسم <i class="fa fa-retweet"></i>
+                                </a>
+
+                            }*@
                 </div>
+
 
             </td>
         </tr>
-
 
 
         </tbody>
 
 
-       
+
 
     </table>
 
@@ -65,3 +105,22 @@
 </div>
 
 
+@section script
+{
+    <script>
+
+        $(document).ready(function () {
+
+            @*$("#ddlBank").change(function () {
+                var bankid = $(this).val();
+
+                $("#datatable").load
+                    ('@Url.Action("Branches","Branches",null,Request.Url.Scheme)?id='+bankid);
+            });*@
+
+
+        });
+
+    </script>
+
+}

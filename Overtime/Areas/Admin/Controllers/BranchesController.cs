@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.EnterpriseServices.Internal;
+
 using System.Linq;
-using System.Web;
+
 using System.Web.Mvc;
-using System.Web.Routing;
+
 using Overtime.Areas.Admin.ViewModel;
-using Overtime.Infrastructure;
+
 using Overtime.Models;
-using WebGrease.Css.Extensions;
-using SelectListItem = System.Web.WebPages.Html.SelectListItem;
+
 
 namespace Overtime.Areas.Admin.Controllers
 {
 
-    [Authorize(Roles = "admin")]
+
     public class BranchesController : Controller
     {
 
@@ -23,109 +20,127 @@ namespace Overtime.Areas.Admin.Controllers
 
         private const int PerPage = 7;
 
-        public JsonResult DeleteBran(int? BranID)
+        public ActionResult Index(int? id,int page=1)
         {
-            if (BranID!= null )
-            
-            
-           {
-                var h = _db.Branches.Find(BranID);
-                try
-                {
-                    _db.Branches.Remove(h);
-                    _db.SaveChanges();
-                    return Json(true);
+           
+            var bank = _db.Banks.ToList();
+            if (bank == null)
+                return HttpNotFound();
+            return View(new BranchIndexVM
+            {
 
-                }
-                catch (Exception)
+                Banks = bank,
+
+                
+            });
+
+        }
+
+        [HttpPost]
+        public ActionResult GetBranches(int? id)
+        {
+
+
+            var branches = from branch in _db.Branches
+                           where branch.BankId == id
+                           orderby branch.Name
+                           select new
+                           {
+                               Id = branch.Id,
+                               Name = branch.Name,
+                               BankId = branch.BankId,
+                               CreatedBy = branch.CreatedBy,
+                               Address = branch.BankAddress
+
+
+
+                           };
+            if (branches == null)
+                return HttpNotFound();
+            return Json(branches, JsonRequestBehavior.AllowGet);
+
+
+        }
+        [Authorize(Roles = "admin,moderator")]
+
+        public ActionResult Create()
+        {
+
+
+            return View("Form", new BranchFormVM
+            {
+
+                IsNew = true,
+                Banks = new SelectList(_db.Banks.ToList(), "Id", "Name")
+
+            });
+        }
+        [Authorize(Roles = "admin,moderator")]
+        public ActionResult Edit(int id)
+        {
+            var branch = _db.Branches.Find(id);
+            if (branch == null)
+                return HttpNotFound();
+
+
+            return View("Form", new BranchFormVM
+            {
+
+                IsNew = false,
+                Banks = new SelectList(_db.Banks.ToList(), "Id", "Name", branch.BankId),
+                Name = branch.Name,
+                Id = branch.Id,
+                Address = branch.BankAddress,
+                SelectedBankId = branch.BankId
+
+            });
+        }
+        public ActionResult Form(BranchFormVM model)
+        {
+
+
+            model.IsNew = model.Id == null;
+            if (!ModelState.IsValid)
+                return View(model);
+            if (model.IsNew)
+            {
+                _db.Branches.Add(new BankBranche()
                 {
-                        
-                    throw;
-                }
+                    BankId = model.SelectedBankId,
+                    BankAddress = model.Address,
+                    Name = model.Name,
+                    CreatedTime = DateTime.UtcNow.AddHours(2),
+                    CreatedBy = Auth.User.Name,
+
+
+
+                });
+
+
+
             }
-
             else
             {
-                return Json(false);
+
+                var branch = _db.Branches.Find(model.Id);
+                if (branch == null)
+                    HttpNotFound();
+                branch.BankId = model.SelectedBankId;
+                branch.BankAddress = model.Address;
+                branch.Name = model.Name;
+                branch.ModifiedTime = DateTime.UtcNow.AddHours(2);
             }
-        }
-        public ActionResult Index( int? id)
-        {
-
-           
-
-                 
-
-                    return View(new BranchIndexVM
-                    {
-                        
-                    });
-                
-           
-        
 
 
-        }
 
-        public ActionResult GetBanks()
-        {
-            var banks = new SelectList( _db.Banks.ToList(),"Id","Name");
-
-            if (HttpContext.Request.IsAjaxRequest())
-                return Json(banks.ToArray(), JsonRequestBehavior.AllowGet);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        public ActionResult Branches(int id)
-        {
-            if (id != null)
-            {
-
-                {
-                    var branches = _db.Branches.Where(x => x.BankId == id).Select(x => new BranchVM()
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        Address = x.BankAddress
-                    }).ToList();
-
-
-                    if (HttpContext.Request.IsAjaxRequest())
-                        return Json(branches.ToArray(), JsonRequestBehavior.AllowGet);
-
-                    
-                }
-            }
-            return View(new BranchIndexVM
-                    {
-
-                    });
-
-
-
-            
-        }
-
-
-        public ActionResult Creat()
-        {
-            return View();
-        }
-
-        public ActionResult Edit()
-        {
-            return View();
-        }
+        [Authorize(Roles = "admin")]
 
         [HttpPost]
-        public ActionResult Form(int? id)
-        {
-            
-            return View();
-        }
-        [HttpPost]
-       
-        public ActionResult Delete(int  id)
+
+        public ActionResult Delete(int id)
         {
             var branch = _db.Branches.Find(id);
             if (branch == null)
@@ -133,7 +148,7 @@ namespace Overtime.Areas.Admin.Controllers
             _db.Branches.Remove(branch);
             _db.SaveChanges();
 
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
     }
 }

@@ -115,7 +115,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             _db.Departments.Remove(department);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
 
         [HttpPost]

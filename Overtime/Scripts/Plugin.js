@@ -11,11 +11,26 @@
         if (!confirm(message))
             return;
         //هنا بيعملى فورم و بيعمل الميثود بتاعتها بوست 
-        $("<form>")
-            .attr("method", "post")
-            .attr("action", btn.attr("href"))
-            .appendTo(document.body)
-            .submit();
+        //$("<form>")
+        //    .attr("method", "post")
+        //    .attr("action", btn.attr("href"))
+        //    .appendTo(document.body)
+        //    .submit();
+
+        $.post(btn.attr("href"),
+            { id: $(this).data("id") },
+            function(data) {
+                if (data.Success) {
+                
+                    btn.closest('tr').remove();
+                }
+               else {
+
+                    window.location.reload(true);
+
+                }
+            });  
+
     });
 
 

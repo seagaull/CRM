@@ -214,7 +214,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             _db.Users.Remove(password);
             _db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(new { Success = true });
         }
     }
 }

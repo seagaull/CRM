@@ -1,0 +1,54 @@
+﻿@model Overtime.Areas.Admin.ViewModel.BranchFormVM
+
+
+<h2><i class="fa fa-stethoscope"></i>  @(Model.IsNew ? "فرع بنك جديد" : "تعديل فرع البنك")</h2>
+
+
+@using (Html.BeginForm("Form", "Branches"))
+{
+    if (!Model.IsNew)
+    {
+        <input name="Id" type="hidden" value="@Model.Id" />
+    }
+    @Html.ValidationSummary()
+    <div class=" form-group form-group-sm">
+
+        <div class="form-group form-horizontal">
+            @Html.LabelFor(x=>x.Banks,new{@class="col-xs-2"})
+            @*@Html.DropDownListFor(x => x.Banks,new SelectList( @Model.Banks,"Id","Name",@Model.SelectedBankId), "أختار البنك", new { @class = "col-xs-4 " })*@
+
+
+            @Html.DropDownList("SelectedBankId", @Model.Banks, "أختار البنك", new { @class = "col-xs-4 " })
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+
+    <div class=" form-group form-group-sm">
+
+        <div class="form-group ">
+            @Html.LabelFor(x => x.Name, new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control col-xs-4 " })
+
+        </div>
+
+
+    </div>
+    <div class="clearfix"></div>
+    <div class=" form-group form-group-sm">
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Address, new { @class = "control-label col-xs-2" })
+            @Html.TextBoxFor(x => x.Address, new { @class = "form-control col-xs-4 " })
+
+        </div>
+
+
+    </div>
+    <div class="clearfix"></div>
+  
+    
+    <input type="submit" class="btn btn-success col-lg-offset-2"
+           value="@(Model.IsNew ? "أدخال " : "تعديل")" />
+    <a href="@Url.Action("index", "Home", new {area = "admin"})">رجوع</a>
+}

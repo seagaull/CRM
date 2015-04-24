@@ -61,7 +61,7 @@
 
                     @if (User.IsInRole("admin"))
                     {
-                        <a href="@Url.Action("delete", "Departments", new {id = item.Id})" data-post="هل تريد حذف حذف المستخدك نهائى ؟!!" class="btn btn-danger">
+                        <a href="@Url.Action("delete", "Users")" data-post="هل تريد حذف حذف المستخدك نهائى ؟!!" data-id="@item.Id" class="btn btn-danger">
                             <i class="fa fa-user-times"></i>
                             حذف
                         </a>

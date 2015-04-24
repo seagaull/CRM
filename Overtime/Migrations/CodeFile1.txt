@@ -1,24 +1,4 @@
-using System.Collections.Generic;
-using System.Data.Entity.Migrations.Infrastructure;
-using System.Web.Mvc;
-using Overtime.Models;
-
-namespace Overtime.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<Overtime.Models.OvertimeDbContext>
-    {
-        public Configuration()
-        {
-            AutomaticMigrationsEnabled = true;
-           
-        }
-
-        protected override void Seed(Overtime.Models.OvertimeDbContext context)
+﻿     protected override void Seed(Overtime.Models.OvertimeDbContext context)
         {
             var user = new User();
             user.Id = 1;
@@ -93,6 +73,3 @@ namespace Overtime.Migrations
 
 
         }
-    }
-
-}

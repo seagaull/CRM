@@ -7,13 +7,13 @@ namespace Overtime.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _001_UserRoles : IMigrationMetadata
+    public sealed partial class _201504101542351_Initialization : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_001_UserRoles));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_201504101542351_Initialization));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504101637495_001_UserRoles"; }
+            get { return "201504242046187_201504101542351_Initialization"; }
         }
         
         string IMigrationMetadata.Source

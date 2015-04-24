@@ -23,6 +23,7 @@ namespace Overtime.Models
         public DbSet<Position> Positions { get; set; }
         public DbSet<BankBranche> Branches { get; set; }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<SubPosition> SubPositions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
