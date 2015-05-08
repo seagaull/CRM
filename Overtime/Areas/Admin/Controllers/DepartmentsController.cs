@@ -1,7 +1,5 @@
 ﻿using System;
-
 using System.Linq;
-
 using System.Web.Mvc;
 using Overtime.Areas.Admin.ViewModel;
 using Overtime.Infrastructure;
@@ -12,15 +10,13 @@ namespace Overtime.Areas.Admin.Controllers
     [Authorize(Roles = "admin ,moderator")]
     public class DepartmentsController : Controller
     {
-        public OvertimeDbContext _db = new OvertimeDbContext();
-
         public const int Perpage = 10;
+        public OvertimeDbContext _db = new OvertimeDbContext();
         // GET: Admin/Departments
 
         public ActionResult Create()
         {
-            
-            return View("Form", new FormVm()
+            return View("Form", new FormVm
             {
                 IsNew = true
             });
@@ -31,54 +27,46 @@ namespace Overtime.Areas.Admin.Controllers
             var totalCount = _db.Departments.Count();
             var departments = _db.Departments.
                 OrderBy(x => x.Name).
-                Skip((page - 1) * Perpage).
+                Skip((page - 1)*Perpage).
                 Take(Perpage).ToList();
             if (departments == null)
                 return HttpNotFound();
             return View(new DepartmentIndex
             {
-             Departments = departments,
-             Paggination = new Paggination(totalCount,page,Perpage)
-           
-           
+                Departments = departments,
+                Paggination = new Paggination(totalCount, page, Perpage)
             });
         }
 
-
-
-
         public ActionResult Edit(int id)
         {
-
             var dep = _db.Departments.Find(id);
             if (dep == null)
                 HttpNotFound();
 
 
-            return View("Form", new FormVm()
+            return View("Form", new FormVm
             {
                 IsNew = false,
                 Name = dep.Name,
                 Id = id
             });
         }
+
         [HttpPost]
         public ActionResult Create(FormVm model)
         {
-
             model.IsNew = model.Id == null;
 
             if (!ModelState.IsValid)
                 return View();
             if (model.IsNew)
             {
-                _db.Departments.Add(new Department()
+                _db.Departments.Add(new Department
                 {
                     Name = model.Name,
                     CreatedBy = Auth.User.Name,
-                    CreatedTime = DateTime.UtcNow.AddHours(2),
-
-
+                    CreatedTime = DateTime.UtcNow.AddHours(2)
                 });
             }
             else
@@ -90,21 +78,20 @@ namespace Overtime.Areas.Admin.Controllers
                 dep.ModifiedTime = DateTime.UtcNow.AddHours(2);
             }
             _db.SaveChanges();
-            return RedirectToAction("Index","Departments");
+            return RedirectToAction("Index", "Departments");
         }
 
         [HttpPost]
         public ActionResult Trash(int id)
         {
             var department = _db.Departments.Find(id);
-            
-            if(department==null)
+
+            if (department == null)
                 HttpNotFound();
-            
-                department.DeletedTime = DateTime.UtcNow.AddHours(2);
+
+            department.DeletedTime = DateTime.UtcNow.AddHours(2);
             _db.SaveChanges();
-                return RedirectToAction("Index");
-            
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -115,7 +102,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             _db.Departments.Remove(department);
             _db.SaveChanges();
-            return Json(new { Success = true });
+            return Json(new {Success = true});
         }
 
         [HttpPost]
@@ -126,10 +113,9 @@ namespace Overtime.Areas.Admin.Controllers
             if (department == null)
                 HttpNotFound();
 
-            department.DeletedTime =null;
+            department.DeletedTime = null;
             _db.SaveChanges();
             return RedirectToAction("Index");
-
         }
     }
 }

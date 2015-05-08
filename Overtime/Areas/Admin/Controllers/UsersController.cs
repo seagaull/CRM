@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
@@ -9,11 +8,10 @@ using Overtime.Models;
 
 namespace Overtime.Areas.Admin.Controllers
 {
-
     public class UsersController : Controller
     {
-        OvertimeDbContext _db = new OvertimeDbContext();
         private const int PerPage = 5;
+        private readonly OvertimeDbContext _db = new OvertimeDbContext();
         // GET: Admin/Users
         [Authorize(Roles = "admin,moderator")]
         public ActionResult Index(int page = 1)
@@ -21,33 +19,31 @@ namespace Overtime.Areas.Admin.Controllers
             var totalCount = _db.Users.Count();
 
             var users = _db.Users.OrderBy(x => x.Name)
-                .Skip((page - 1) * PerPage)
+                .Skip((page - 1)*PerPage)
                 .Take(PerPage).ToList();
 
             return View(new UsersIndexVM
             {
                 Users = users,
                 Paggination = new Paggination(totalCount, page, PerPage)
-
             });
-
         }
+
         [Authorize(Roles = "admin")]
         public ActionResult Create()
         {
-            return View("Form", new UserForm()
+            return View("Form", new UserForm
             {
                 IsNew = true,
-                Roles = _db.Roles.Select(x => new RolesCheckBox()
+                Roles = _db.Roles.Select(x => new RolesCheckBox
                 {
                     Id = x.Id,
                     Name = x.Name,
                     Checked = false
                 }).ToList()
-
             });
-
         }
+
         [Authorize(Roles = "admin,moderator")]
         public ActionResult Edit(int id)
         {
@@ -56,25 +52,23 @@ namespace Overtime.Areas.Admin.Controllers
                 return HttpNotFound();
 
             var role = _db.Roles.ToList();
-            var form = new UserForm()
+            var form = new UserForm
             {
                 Id = user.Id,
                 IsNew = false,
                 Name = user.Name,
-
-                Roles = role.Select(r => new RolesCheckBox()
+                Roles = role.Select(r => new RolesCheckBox
                 {
                     Id = r.Id,
                     Name = r.Name,
                     Checked = user.Roles.Contains(r)
                 }).ToList()
-
             };
 
 
             return View("Form", form);
-
         }
+
         [HttpPost]
         public ActionResult Form(UserForm model)
         {
@@ -88,23 +82,17 @@ namespace Overtime.Areas.Admin.Controllers
 
             if (model.IsNew)
             {
-                user = new User()
-               {
-                   Name = model.Name,
-
-                   CreatedBy = User.Identity.Name,
-                   CreatedTime = DateTime.UtcNow.AddHours(2)
-
-
-               };
+                user = new User
+                {
+                    Name = model.Name,
+                    CreatedBy = User.Identity.Name,
+                    CreatedTime = DateTime.UtcNow.AddHours(2)
+                };
                 user.Passwordhash = user.SetPassword(model.Password);
                 foreach (var role in model.Roles)
                 {
-
                     if (role.Checked)
                     {
-
-
                         user.Roles.Add(_db.Roles.Find(role.Id));
                     }
                 }
@@ -122,31 +110,22 @@ namespace Overtime.Areas.Admin.Controllers
                 //added roles 
                 foreach (var role in model.Roles.Where(x => x.Checked))
                 {
-
                     //if user role dosent have one or more checked role add role
                     if (user.Roles.Any(x => x.Id != role.Id))
                     {
                         user.Roles.Add(allRoles.SingleOrDefault(x => x.Id == role.Id));
-
                     }
-
-
                 }
 
                 foreach (var role in model.Roles.Where(x => !x.Checked))
                 {
-
                     //if user role dosent have one or more checked role add role
                     if (user.Roles.Any(x => x.Id == role.Id))
                     {
                         user.Roles.Remove(allRoles.SingleOrDefault(x => x.Id == role.Id));
-
                     }
-
-
                 }
                 ModelState.Remove("password");
-
             }
             if (!ModelState.IsValid)
                 return View(model);
@@ -154,9 +133,7 @@ namespace Overtime.Areas.Admin.Controllers
 
             try
             {
-
                 _db.SaveChanges();
-
             }
             catch (DbEntityValidationException e)
             {
@@ -174,15 +151,13 @@ namespace Overtime.Areas.Admin.Controllers
             }
 
 
-
-
             return RedirectToAction("Index");
-
         }
+
         [Authorize(Roles = "admin,moderator")]
         public ActionResult ResetPassword(int id)
         {
-            User password = _db.Users.Find(id);
+            var password = _db.Users.Find(id);
             if (password == null)
                 HttpNotFound();
 
@@ -193,11 +168,12 @@ namespace Overtime.Areas.Admin.Controllers
                 Name = password.Name
             });
         }
+
         [HttpPost]
         [Authorize(Roles = "admin")]
         public ActionResult ResetPassword(ResetPasswordVM model)
         {
-            User password = _db.Users.Find(model.Id);
+            var password = _db.Users.Find(model.Id);
             if (password == null)
                 HttpNotFound();
 
@@ -209,12 +185,12 @@ namespace Overtime.Areas.Admin.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
-            User password = _db.Users.Find(id);
-            if (password == null)
+            var user = _db.Users.Find(id);
+            if (user == null)
                 HttpNotFound();
-            _db.Users.Remove(password);
+            _db.Users.Remove(user);
             _db.SaveChanges();
-            return Json(new { Success = true });
+            return Json(new {Success = true});
         }
     }
 }

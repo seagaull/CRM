@@ -6,25 +6,34 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("كلية الطب ", "Index", "Home", new { area = "" }, new { @class = "navbar-brand " })
-       
+            @Html.ActionLink("كلية الطب ", "Index", "Home", new {area = ""}, new {@class = "navbar-brand "})
+
         </div>
         <div class="navbar-collapse collapse pull-right">
             <ul class="nav navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li> <a href="@Url.RouteUrl("Logout")">خروج</a></li>
-                    <li> <a href="@Url.RouteUrl("Login")">أنشاء أستمارة</a></li>
-                    <li> <a href="@Url.RouteUrl("Login")">الأرشيف</a></li>
-                    if (User.IsInRole("admin"))
+                    <li>
+                        <a href="@Url.RouteUrl("Logout")">خروج</a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl("Login")">أنشاء أستمارة</a>
+                    </li>
+                    <li>
+                        <a href="@Url.RouteUrl("Login")">الأرشيف</a>
+                    </li>
+                    if (User.IsInRole("admin") || User.IsInRole("moderator"))
                     {
-                        <li> <a href="@Url.RouteUrl("admin")">مدير الصفحة</a></li>
+                        <li>
+                            <a href="@Url.RouteUrl("admin")">مدير الصفحة</a>
+                        </li>
                     }
                 }
                 else
                 {
-
-                    <li> <a href="@Url.RouteUrl("Login")">دخول</a></li>
+                    <li>
+                        <a href="@Url.RouteUrl("Login")">دخول</a>
+                    </li>
                 }
 
 

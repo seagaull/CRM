@@ -2,26 +2,25 @@
 
 
 <div>
-    <a href="@Url.Action("Create", "Banks", new { area = "admin" })" class="btn btn-primary  pull-left"> تسجيل بنك   جديد <i class="fa fa-bank"></i></a>
+    <a href="@Url.Action("Create", "Banks", new {area = "admin"})" class="btn btn-primary  pull-left"> تسجيل بنك جديد <i class="fa fa-bank"></i></a>
 </div>
-
 
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <td colspan="4">
+    <tr>
+        <td colspan="4">
 
-                @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
+            @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
 
-            </td>
-        </tr>
-        <tr>
-            <th>أسم البنك </th>
-            <th>أنشىء بواسطة</th>
-            <th>أنشىء فى </th>
-            <th>عمليات </th>
-        </tr>
+        </td>
+    </tr>
+    <tr>
+        <th>أسم البنك </th>
+        <th>أنشىء بواسطة</th>
+        <th>أنشىء فى </th>
+        <th>عمليات </th>
+    </tr>
 
     </thead>
     @foreach (var item in Model.Banks)
@@ -46,7 +45,7 @@
                     @if (!item.IsDeleted)
                     {
                         <div class="btn-group btn-group-xs">
-                            <a href="@Url.Action("trash", "Banks", new { id = item.Id })"
+                            <a href="@Url.Action("trash", "Banks", new {id = item.Id})"
                                class="btn btn-danger"
                                data-post="هل تريد ألغاء الدرجة @item.Name">
                                 سلة المهملات <i class="fa fa-trash"></i>
@@ -57,7 +56,7 @@
                             </a>
                             <ul class="dropdown-menu ">
                                 <li>
-                                    <a href="@Url.Action("delete", "Banks", new { id = item.Id })" data-post="هل تريد حذف الدرجة حذف نهائى ؟!!">
+                                    <a href="@Url.Action("delete", "Banks", new {id = item.Id})" data-post="هل تريد حذف الدرجة حذف نهائى ؟!!">
                                         <i class="fa fa-remove"></i>
                                         حذف
                                     </a>
@@ -73,13 +72,11 @@
                            data-post>
                             أعادة القسم <i class="fa fa-retweet"></i>
                         </a>
-
                     }
                 </div>
 
 
             </td>
         </tr>
-
     }
 </table>

@@ -1,0 +1,206 @@
+﻿@model Overtime.Areas.Admin.ViewModel.EmployeesFormxVM
+
+
+<h2>
+    <i class="fa fa-user-md"></i> @(Model.IsNew ? "موظف جديد" : "تعديل بيانات موظف")
+</h2>
+
+
+@using (Html.BeginForm("Form", "Employee"))
+{
+    if (!Model.IsNew)
+    {
+        <input name="Id" type="hidden" value="@Model.Id" />
+    }
+    @Html.ValidationSummary()
+
+    <div class="row">
+        <div class="col-xs-6">
+
+            <div class="input-group input-group-lg col-xs-11">
+                @Html.LabelFor(x => x.Name, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Address, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11" data-validate='maxlength' data-maxlength='14'>
+                @Html.LabelFor(x => x.NationalId, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.NationalId, new { @class = "form-control " })
+
+
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.ATMNum, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.ATMNum, new { @class = "form-control" })
+
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Departments, new { @class = "input-group-addon" })
+
+                @Html.DropDownListFor(x => x.SelectedDepartment, new SelectList(@Model.Departments, "Id", "Name", @Model.SelectedDepartment), "أختار القسم", new { @class = "form-control" })
+
+
+            </div>
+
+
+
+
+            <div class="input-group input-group-lg col-xs-11 ">
+
+
+            </div>
+            <div class="alert alert-info col-xs-11">
+                وسيلة الدفع؟!!
+
+                @Html.RadioButtonFor(x => x.ATM, true)ATM
+                @Html.RadioButtonFor(x => x.ATM, false)حساب بنكى
+
+
+            </div>
+
+
+
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Banks, new { @class = "input-group-addon" })
+
+                @Html.DropDownList("SelectedBank", new SelectList(@Model.Banks, "Id", "Name"), "أختار البنك", new { id = "SelectedBank", @class = "form-control" })
+                @if (Model.IsNew || Model.SelectedBranch == null)
+                {
+                    <select id="ddlbranch" name="SelectedBranch" class="form-control"><option>أختار الفرع</option></select>
+                }
+                else
+                {
+
+                    @Html.DropDownList("SelectedBranch", @Model.Branches, "أختار البنك", new { id = "ddlbranch", @class = "form-control" });
+                }
+
+            </div>
+
+
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.AccountNum, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.AccountNum, new { @class = "form-control" })
+
+            </div>
+
+        </div>
+
+        <div class="col-xs-6">
+
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Position, new { @class = "input-group-addon" })
+
+                @Html.DropDownList("SelectedPosition", new SelectList(Model.Position, "Id", "Name", Model.SelectedPosition), "أختارالوظيفة", new { id = "SelectedPosition", @class = "form-control" })
+                @if (Model.IsNew || Model.SelectedPosition == null)
+                {
+                    <select id="ddlposition" name="SelectedGrade" class="form-control"><option>أختار الدرجة</option></select>
+                }
+                else
+                {
+
+                    @Html.DropDownList("SelectedGrade", new SelectList(@Model.Grades, "Id", "Name", @Model.SelectedGrade), "أختار الدرجة", new { id = "ddlposition", @class = "form-control" });
+                }
+
+
+            </div>
+
+
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.PositionDate, new { @class = "input-group-addon" })
+              
+
+              
+                <input type="text" name="PositionDate" value="@Model.PositionDate" class="form-control datepicker" />
+            
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11">
+                @Html.LabelFor(x => x.Phone, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+
+
+            </div>
+
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Code, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.Code, new { @class = "form-control" })
+
+
+            </div>
+            <div class="input-group input-group-lg col-xs-11 ">
+                @Html.LabelFor(x => x.Email, new { @class = "input-group-addon" })
+
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+
+
+            </div>
+
+
+            <div class="alert alert-info col-xs-11">
+                النوع ؟
+
+                @Html.RadioButtonFor(x => x.Gender, "male")ذكر
+                @Html.RadioButtonFor(x => x.Gender, "female")أنثى
+
+            </div>
+
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-xs-12">
+            <div class="">
+                @Html.LabelFor(x => x.Description, new { @class = "input-group-addon" })
+
+                @Html.TextAreaFor(x => x.Description, new { @class = "form-control ", rows = 6 })
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <input type="submit" class="btn btn-primary btn-sm col-lg-offset-5"
+           value="@(Model.IsNew ? "أدخال " : "تعديل")" />
+    <a href="@Url.Action("index", "Home", new {area = "admin"})">رجوع</a>
+
+}
+
+@section script
+{
+
+    <script src="~/Areas/Admin/Scripts/EmplyeeForm.js"></script>
+
+    <script>
+
+
+        
+        $('#test').blur(function () {
+            $(this).valid();
+        });
+    </script>
+}

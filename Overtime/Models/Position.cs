@@ -1,46 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Web;
 
 namespace Overtime.Models
 {
-    public class Position:AbstractData
+    public class Position : AbstractData
     {
+        public Position()
+        {
+            SubPositions = new List<SubPosition>();
+        }
+
         public virtual ICollection<SubPosition> SubPositions { get; set; }
-
-       
-
     }
 
     public class PositionMapping : EntityTypeConfiguration<Position>
     {
         public PositionMapping()
         {
-            this.ToTable("tbl_Positions")
+            ToTable("tbl_Positions")
                 .HasKey(x => x.Id)
                 .Property(x => x.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            this.Property(x => x.CreatedBy).IsRequired();
-            this.Property(x => x.CreatedTime).IsRequired();
-            this.Property(x => x.ModifiedTime).IsOptional();
-            this.Property(x => x.DeletedTime).IsOptional();
-           
+            Property(x => x.CreatedBy).IsRequired();
+            Property(x => x.CreatedTime).IsRequired();
+            Property(x => x.ModifiedTime).IsOptional();
+            Property(x => x.DeletedTime).IsOptional();
 
 
-
-            this.Property(x => x.Name)
+            Property(x => x.Name)
                 .HasColumnType("nvarchar")
                 .HasMaxLength(256);
-           
-
-           
-
-
         }
     }
 }

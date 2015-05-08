@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
 using Overtime.Models;
 
@@ -10,16 +8,16 @@ namespace Overtime
 
     {
         private const string UserKey = "UserKey";
-        
+
         public static User User
         {
             get
             {
-                OvertimeDbContext _db = new OvertimeDbContext();
+                var _db = new OvertimeDbContext();
                 if (!HttpContext.Current.User.Identity.IsAuthenticated)
                     return null;
                 var user = HttpContext.Current.Items[UserKey] as User;
-                if (user ==null)
+                if (user == null)
                 {
                     user = _db.Users.FirstOrDefault(x => x.Name == HttpContext.Current.User.Identity.Name);
                     if (user == null)
@@ -28,7 +26,6 @@ namespace Overtime
                 }
                 return user;
             }
-            
         }
     }
 }

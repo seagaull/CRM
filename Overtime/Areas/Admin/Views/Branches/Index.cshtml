@@ -3,8 +3,8 @@
 
 
 @*<select id="ddlBanks"  name="ddlBanks" ></select>*@
-@Html.DropDownListFor(x=>x.Selected, new SelectList(@Model.Banks, "Id", "Name"),"اختار الفرع",
-new { id = "ddlBank" })
+@Html.DropDownListFor(x => x.Selected, new SelectList(@Model.Banks, "Id", "Name"), "اختار الفرع",
+    new {id = "ddlBank"})
 <a href="@Url.Action("Create", "Branches")" class="btn btn-primary btn-lg  pull-left">
     <i class="fa fa-plus"></i>
     فرع جديد
@@ -12,18 +12,18 @@ new { id = "ddlBank" })
 <div>
     <table class="table table-striped">
         <thead>
-            <tr>
-                <td colspan="4">
+        <tr>
+            <td colspan="4">
 
-                    @*@Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)*@
+                @*@Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)*@
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         <tr>
             <th>كود الفرع </th>
             <th>أسم الفرع </th>
             <th>أنشىء بواسطة</th>
-    
+
             <th>عمليات</th>
 
         </tr>
@@ -36,10 +36,8 @@ new { id = "ddlBank" })
             <td class="ids"></td>
             <td class="name"></td>
             <td class="createdBy"></td>
-            
-          
 
-           
+
             <td>
                 <div class="btn-group btn-group-xs  ">
                     <a class="btn btn-primary btn-edit">
@@ -93,13 +91,7 @@ new { id = "ddlBank" })
         </tbody>
 
 
-
-
     </table>
-
-
-
-
 
 
 </div>
@@ -109,7 +101,7 @@ new { id = "ddlBank" })
 {
     <script>
 
-        $(document).ready(function () {
+        $(document).ready(function() {
 
             @*$("#ddlBank").change(function () {
                 var bankid = $(this).val();

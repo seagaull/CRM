@@ -5,17 +5,17 @@
     @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(x => x.Username)
-        @Html.EditorFor(x => x.Username, new { @class = "form-control" })
+        @Html.EditorFor(x => x.Username, new {@class = "form-control"})
 
     </div>
     <div class="form-group">
         @Html.LabelFor(x => x.PasswoedHash)
-        @Html.EditorFor(x => x.PasswoedHash, new { @class = "form-control" })
+        @Html.EditorFor(x => x.PasswoedHash, new {@class = "form-control"})
 
     </div>
 
     <div class="form-group-sm">
-        @Html.CheckBoxFor(x=>x.RemomeberMe)
+        @Html.CheckBoxFor(x => x.RemomeberMe)
         <input type="submit" value="login" class="btn btn-primary"/>
     </div>
 }

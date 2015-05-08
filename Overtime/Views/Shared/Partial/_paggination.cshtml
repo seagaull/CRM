@@ -1,18 +1,14 @@
 ﻿@model Overtime.Infrastructure.Paggination
 
 
-
-
 <div class="btn-group">
     @if (Model.HasPrevious)
     {
-
         <a href="@Url.Action(null, new {page = Model.PreviousPage})" class="btn btn-primary btn-sm">
 
             السابق
             <i class="glyphicon glyphicon-chevron-right"></i>
         </a>
-
     }
     else
     {
@@ -20,26 +16,21 @@
             <i class="glyphicon glyphicon-chevron-right"></i> السابق
         </a>
     }
-    @for (int i = 1; i <= Model.TotalPages; i++)
+    @for (var i = 1; i <= Model.TotalPages; i++)
     {
-
-
         <a href="@Url.Action(null, new {page = i})"
-           class="@(Model.Page==i ?
-       "btn btn-primary  btn-sm" :
-       "btn btn-default  btn-sm") ">
+           class="@(Model.Page == i ?
+                        "btn btn-primary  btn-sm" :
+                        "btn btn-default  btn-sm") ">
             @i
         </a>
-
     }
     @if (Model.HasNext)
     {
-
         <a href="@Url.Action(null, new {page = Model.NextPage})" class="btn btn-primary btn-sm">
             <i class="glyphicon glyphicon-chevron-left"></i>
             التالى
         </a>
-
     }
     else
     {

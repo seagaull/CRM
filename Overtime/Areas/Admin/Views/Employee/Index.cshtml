@@ -1,0 +1,166 @@
+﻿@model Overtime.Areas.Admin.ViewModel.EmployeesIndexVM
+
+@*<div class="panel panel-primary">
+    <div class="panel panel-heading">
+
+        البحث
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="panel-body">
+            <div class="input-group">
+                <div class="row">
+                    <div class="col-xs-4">
+                        @Html.LabelFor(x => x.Search.Name)
+                        @Html.TextBoxFor(x => x.Search.Name, new {@class="form-control"})
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.LabelFor(x => x.Search.NationalId)
+                        @Html.TextBoxFor(x => x.Search.NationalId, new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.LabelFor(x => x.Search.AtmNum)
+                        @Html.TextBoxFor(x => x.Search.AtmNum, new { @class = "form-control" })
+                    </div>
+                    <div class="col-xs-4">
+                        @Html.LabelFor(x => x.Search.Code)
+                        @Html.TextBoxFor(x => x.Search.Code, new { @class = "form-control" })
+                    </div>
+                </div>
+                <input type="submit" value="بحث" class="btn btn-primary btn-block " />
+            </div>
+
+        </div>
+    }
+
+
+
+
+</div>*@
+
+<a href="@Url.Action("Create", "Employee")" class="btn btn-primary btn-lg  pull-left">
+    <i class="fa fa-user-plus fa-2x"></i>
+    موظف جديد
+</a>
+
+<div id="mygrid">
+
+    <table id="grid"></table>
+    <div id="pager">
+
+    </div>
+</div>
+
+
+@*<div>
+
+
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td colspan="4">
+
+                    @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
+
+                </td>
+            </tr>
+            <tr>
+                <th>كود الفرع </th>
+                <th>أسم الموظف </th>
+                <th>كود الموظف</th>
+
+                <th>عمليات</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="myTable">
+            @foreach (var emp in Model.Employees)
+            {
+                <tr class="">
+                    <td class="ids">@emp.Id</td>
+                    <td class="name">@emp.Name</td>
+                    <td class="createdBy">@emp.Code</td>
+
+
+                    <td>
+                        <div class="btn-group btn-group-xs  ">
+                            <a class="btn btn-primary btn-edit" href="@Url.Action("Edit", "Employee", new {id = @emp.Id})">
+
+
+                                <span class="fa fa-pencil"></span> تعديل
+                            </a>
+
+                            @if (!emp.IsDeleted)
+                            {
+                                <div class="btn-group btn-group-xs">
+                                    <a href="@Url.Action("trash", "Employee", new {id = emp.Id})"
+                                       class="btn btn-danger"
+                                       data-post="هل تريد ألغاء قسم @emp.Name">
+                                        سلة المهملات <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger dropdown-toggle"
+                                       data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="@Url.Action("delete", "Employee", new {id = emp.Id})" data-post="هل تريد حذف القسم حذف نهائى ؟!!">
+                                                <i class="fa fa-remove"></i>
+                                                حذف
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("restore", "Employee", new {id = emp.Id})"
+                                   class="btn btn-success"
+                                   data-post>
+                                    أعادة القسم <i class="fa fa-retweet"></i>
+                                </a>
+
+                            }
+                        </div>
+
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+
+
+    </table>
+
+
+</div>*@
+
+
+@section script
+{
+    <script>
+
+        $(document).ready(function() {
+
+            $("#ddlBank").change(function() {
+                var bankid = $(this).val();
+
+                $("#datatable").load
+                ('@Url.Action("Branches", "Branches", null, Request.Url.Scheme)?id=' + bankid);
+            });
+
+
+        });
+
+    </script>
+<script src="~/Areas/Admin/Scripts/EmplyeeForm.js"></script>
+
+}

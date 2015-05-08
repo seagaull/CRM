@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
-using Overtime.Models;
-using Overtime.ViewModel;
+﻿using System.Web.Mvc;
 
 namespace Overtime.Controllers
 {
@@ -15,10 +8,7 @@ namespace Overtime.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            
-
             return View();
         }
-       
     }
 }

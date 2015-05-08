@@ -1,23 +1,25 @@
-﻿body {
+﻿body { }
 
-}
-.selected {
-   
-   
-    
-  
-}
+.selected { }
+
 .selected a {
     
-     background: #d9edf7;
+    background: #d9edf7;
     border-left-color: #3a87ad;
 }
+
 .selected:before {
 
-    content: "";
     border: 10px solid transparent;
+    content: "";
+}
+
+.side-menu { margin-top: 40px; }
+#mygrid {
+    margin-top: 40px;
 
 }
-.side-menu {
-    margin-top: 40px;
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr {
+
+    direction: rtl;
 }

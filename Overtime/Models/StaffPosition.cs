@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity.ModelConfiguration;
-using System.Linq;
-using System.Web;
 
 namespace Overtime.Models
 {
- 
     public class StaffPosition
     {
         public int StaffId { get; set; }
         public int PositionId { get; set; }
-
-        public DateTime StartDate { get; set; }
-
-        public virtual Staff Staff { get; set; }
+        public DateTime? StartDate { get; set; }
+        public virtual Employee Employee { get; set; }
         public virtual SubPosition SubPosition { get; set; }
     }
 
@@ -22,26 +16,24 @@ namespace Overtime.Models
     {
         public StaffPositionMapping()
         {
-            this.ToTable("tbl_StaffPositions");
-            this.HasKey(x => new
+            ToTable("tbl_StaffPositions");
+            HasKey(x => new
             {
                 x.PositionId,
                 x.StaffId
             });
-            this.Property(x => x.PositionId);
-            this.Property(x => x.StaffId);
-            this.Property(x => x.StartDate);
+            Property(x => x.PositionId);
+            Property(x => x.StaffId);
+            Property(x => x.StartDate);
 
-            this.HasRequired(x => x.Staff)
+            HasRequired(x => x.Employee)
                 .WithMany(x => x.SubPositions)
-                .HasForeignKey(x=>x.StaffId);
-                
+                .HasForeignKey(x => x.StaffId);
 
 
-            this.HasRequired(x => x.SubPosition)
+            HasRequired(x => x.SubPosition)
                 .WithMany(x => x.Staff)
-                .HasForeignKey(x=>x.PositionId);
-
+                .HasForeignKey(x => x.PositionId);
         }
     }
 }

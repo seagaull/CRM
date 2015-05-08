@@ -1,27 +1,26 @@
 ﻿@model Overtime.Areas.Admin.ViewModel.UsersIndexVM
 
 <div>
-    <a href="@Url.Action("Create","Users",new{area="admin"})" class="btn btn-primary  pull-left">مستخدم جديد <i class="fa fa-user-plus"></i></a>
+    <a href="@Url.Action("Create", "Users", new {area = "admin"})" class="btn btn-primary  pull-left">مستخدم جديد <i class="fa fa-user-plus"></i></a>
 </div>
-
 
 
 <table class="table table-striped">
     <thead>
-        <tr>
-            <td colspan="4">
+    <tr>
+        <td colspan="4">
 
-                @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
+            @Html.Partial("../../Views/Shared/Partial/_paggination", @Model.Paggination)
 
-            </td>
-        </tr>
-        <tr>
-            <th>أسم المستخدم</th>
-            <th>أنشىء بواسطة</th>
-            <th>أنشىء فى </th>
-            <th>صلاحيات المستخدم</th>
-            <th>عمليات </th>
-        </tr>
+        </td>
+    </tr>
+    <tr>
+        <th>أسم المستخدم</th>
+        <th>أنشىء بواسطة</th>
+        <th>أنشىء فى </th>
+        <th>صلاحيات المستخدم</th>
+        <th>عمليات </th>
+    </tr>
 
     </thead>
     @foreach (var item in Model.Users)
@@ -40,19 +39,18 @@
             <td>
                 @foreach (var role in item.Roles)
                 {
-
                     <span class="badge">@role.Name</span>
                 }
 
             </td>
             <td>
                 <div class="btn-group btn-group-xs  ">
-                    <a href="@Url.Action("Edit", "Users", new { id = @item.Id, area = "admin" })" class="btn btn-primary ">
+                    <a href="@Url.Action("Edit", "Users", new {id = @item.Id, area = "admin"})" class="btn btn-primary ">
 
 
                         <i class="fa fa-user-md"></i> تعديل
                     </a>
-                    <a href="@Url.Action("ResetPassword", "Users", new { id = @item.Id, area = "admin" })" class="btn btn-default ">
+                    <a href="@Url.Action("ResetPassword", "Users", new {id = @item.Id, area = "admin"})" class="btn btn-default ">
 
 
                         <i class="fa fa-key"></i> أعادة كلمة المرور
@@ -73,6 +71,5 @@
 
             </td>
         </tr>
-
     }
 </table>

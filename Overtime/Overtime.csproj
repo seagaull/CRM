@@ -140,13 +140,17 @@
     <Compile Include="Areas\Admin\Controllers\BanksController.cs" />
     <Compile Include="Areas\Admin\Controllers\BranchesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DepartmentsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\PositionsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubPositionsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\ViewModel\BanksVM.cs" />
     <Compile Include="Areas\Admin\ViewModel\BranchVM.cs" />
     <Compile Include="Areas\Admin\ViewModel\DepartmentsVM.cs" />
+    <Compile Include="Areas\Admin\ViewModel\EmployeesVM.cs" />
     <Compile Include="Areas\Admin\ViewModel\PositionsVM.cs" />
+    <Compile Include="Areas\Admin\ViewModel\SubPositionsVM.cs" />
     <Compile Include="Areas\Admin\ViewModel\UsersVM.cs" />
     <Compile Include="Auth.cs" />
     <Compile Include="Controllers\AuthController.cs" />
@@ -158,22 +162,95 @@
     <Compile Include="Infrastructure\Paggination.cs" />
     <Compile Include="Infrastructure\RoleProvider.cs" />
     <Compile Include="Infrastructure\Test.cs" />
+    <Content Include="Areas\Admin\Scripts\EmplyeeForm.js" />
+    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Content\jquery.jqGrid\ui.jqgrid.css" />
+    <Content Include="Content\style\bootsnipp.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Migrations\CodeFile1.txt" />
     <Compile Include="Migrations\201504242046187_201504101542351_Initialization.cs" />
     <Compile Include="Migrations\201504242046187_201504101542351_Initialization.Designer.cs">
       <DependentUpon>201504242046187_201504101542351_Initialization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504251358182_AlterStafftoEmployees.cs" />
+    <Compile Include="Migrations\201504251358182_AlterStafftoEmployees.Designer.cs">
+      <DependentUpon>201504251358182_AlterStafftoEmployees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504251501179_AlterStafftoEmployees3.cs" />
+    <Compile Include="Migrations\201504251501179_AlterStafftoEmployees3.Designer.cs">
+      <DependentUpon>201504251501179_AlterStafftoEmployees3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504251548566_AlterStafftoEmployees4.cs" />
+    <Compile Include="Migrations\201504251548566_AlterStafftoEmployees4.Designer.cs">
+      <DependentUpon>201504251548566_AlterStafftoEmployees4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504251613381_AlterEmployeesCode.cs" />
+    <Compile Include="Migrations\201504251613381_AlterEmployeesCode.Designer.cs">
+      <DependentUpon>201504251613381_AlterEmployeesCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261326434_EmployeeGender.cs" />
+    <Compile Include="Migrations\201504261326434_EmployeeGender.Designer.cs">
+      <DependentUpon>201504261326434_EmployeeGender.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504261416079_EmployeenationalId.cs" />
+    <Compile Include="Migrations\201504261416079_EmployeenationalId.Designer.cs">
+      <DependentUpon>201504261416079_EmployeenationalId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504291818098_alterCasscade.cs" />
+    <Compile Include="Migrations\201504291818098_alterCasscade.Designer.cs">
+      <DependentUpon>201504291818098_alterCasscade.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504291828420_alterCasscade2.cs" />
+    <Compile Include="Migrations\201504291828420_alterCasscade2.Designer.cs">
+      <DependentUpon>201504291828420_alterCasscade2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201505022132291_nullabledate.cs" />
+    <Compile Include="Migrations\201505022132291_nullabledate.Designer.cs">
+      <DependentUpon>201505022132291_nullabledate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AbstractData.cs" />
     <Compile Include="Models\AbstractDataMapping.cs" />
     <Compile Include="Models\BankBranche.cs" />
     <Compile Include="Models\Bank.cs" />
-    <Compile Include="Models\BankStaffsDetails.cs" />
+    <Compile Include="Models\EmplyeesBankDetails.cs" />
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\OvertimeDbContext.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\Employees.cs" />
     <Compile Include="Models\StaffPosition.cs" />
     <Compile Include="Models\SubPosition.cs" />
     <Compile Include="Models\User.cs" />
@@ -203,6 +280,7 @@
     <Content Include="Content\style\bootstrap.css.map" />
     <Content Include="Icon.png" />
     <Content Include="LICENSE.txt" />
+    <Content Include="Scripts\bootsnipp.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
@@ -227,10 +305,63 @@
     <Content Include="Areas\Admin\Views\Branches\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Branches\partial\_datarow.cshtml" />
     <Content Include="Areas\Admin\Views\Branches\Form.cshtml" />
+    <Content Include="Areas\Admin\Views\SubPositions\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\SubPositions\Form.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Form.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\i18n\grid.locale-ar.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg.js" />
+    <Content Include="Scripts\i18n\grid.locale-bg1251.js" />
+    <Content Include="Scripts\i18n\grid.locale-cat.js" />
+    <Content Include="Scripts\i18n\grid.locale-cn.js" />
+    <Content Include="Scripts\i18n\grid.locale-cs.js" />
+    <Content Include="Scripts\i18n\grid.locale-da.js" />
+    <Content Include="Scripts\i18n\grid.locale-de.js" />
+    <Content Include="Scripts\i18n\grid.locale-dk.js" />
+    <Content Include="Scripts\i18n\grid.locale-el.js" />
+    <Content Include="Scripts\i18n\grid.locale-en.js" />
+    <Content Include="Scripts\i18n\grid.locale-es.js" />
+    <Content Include="Scripts\i18n\grid.locale-fa.js" />
+    <Content Include="Scripts\i18n\grid.locale-fi.js" />
+    <Content Include="Scripts\i18n\grid.locale-fr.js" />
+    <Content Include="Scripts\i18n\grid.locale-gl.js" />
+    <Content Include="Scripts\i18n\grid.locale-he.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr.js" />
+    <Content Include="Scripts\i18n\grid.locale-hr1250.js" />
+    <Content Include="Scripts\i18n\grid.locale-hu.js" />
+    <Content Include="Scripts\i18n\grid.locale-id.js" />
+    <Content Include="Scripts\i18n\grid.locale-is.js" />
+    <Content Include="Scripts\i18n\grid.locale-it.js" />
+    <Content Include="Scripts\i18n\grid.locale-ja.js" />
+    <Content Include="Scripts\i18n\grid.locale-kr.js" />
+    <Content Include="Scripts\i18n\grid.locale-lt.js" />
+    <Content Include="Scripts\i18n\grid.locale-mne.js" />
+    <Content Include="Scripts\i18n\grid.locale-nl.js" />
+    <Content Include="Scripts\i18n\grid.locale-no.js" />
+    <Content Include="Scripts\i18n\grid.locale-pl.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt-br.js" />
+    <Content Include="Scripts\i18n\grid.locale-pt.js" />
+    <Content Include="Scripts\i18n\grid.locale-ro.js" />
+    <Content Include="Scripts\i18n\grid.locale-ru.js" />
+    <Content Include="Scripts\i18n\grid.locale-sk.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr-latin.js" />
+    <Content Include="Scripts\i18n\grid.locale-sr.js" />
+    <Content Include="Scripts\i18n\grid.locale-sv.js" />
+    <Content Include="Scripts\i18n\grid.locale-th.js" />
+    <Content Include="Scripts\i18n\grid.locale-tr.js" />
+    <Content Include="Scripts\i18n\grid.locale-tw.js" />
+    <Content Include="Scripts\i18n\grid.locale-ua.js" />
+    <Content Include="Scripts\i18n\grid.locale-vi.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.jqGrid.min.js" />
+    <Content Include="Scripts\jquery.jqGrid.src.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -275,6 +406,33 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201504242046187_201504101542351_Initialization.resx">
       <DependentUpon>201504242046187_201504101542351_Initialization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504251358182_AlterStafftoEmployees.resx">
+      <DependentUpon>201504251358182_AlterStafftoEmployees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504251501179_AlterStafftoEmployees3.resx">
+      <DependentUpon>201504251501179_AlterStafftoEmployees3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504251548566_AlterStafftoEmployees4.resx">
+      <DependentUpon>201504251548566_AlterStafftoEmployees4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504251613381_AlterEmployeesCode.resx">
+      <DependentUpon>201504251613381_AlterEmployeesCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261326434_EmployeeGender.resx">
+      <DependentUpon>201504261326434_EmployeeGender.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504261416079_EmployeenationalId.resx">
+      <DependentUpon>201504261416079_EmployeenationalId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504291818098_alterCasscade.resx">
+      <DependentUpon>201504291818098_alterCasscade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504291828420_alterCasscade2.resx">
+      <DependentUpon>201504291828420_alterCasscade2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201505022132291_nullabledate.resx">
+      <DependentUpon>201505022132291_nullabledate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,15 +1,17 @@
 ﻿@model Overtime.Areas.Admin.ViewModel.PositionOperationsVM
 
 
-<h2><i class="fa fa-stethoscope"></i>  @(Model.IsNew ? "درجة جديده" : "تعديل الدرجة")</h2>
+<h2>
+    <i class="fa fa-stethoscope"></i> @(Model.IsNew ? "درجة جديده" : "تعديل الدرجة")
+</h2>
 
 
 @using (Html.BeginForm("Create", "Positions"))
 {
-if (!Model.IsNew)
- {
-     <input name="Id" type="hidden" value="@Model.Id"/>
- }
+    if (!Model.IsNew)
+    {
+        <input name="Id" type="hidden" value="@Model.Id"/>
+    }
     @Html.ValidationSummary()
     <div class=" form-group form-group-sm">
 

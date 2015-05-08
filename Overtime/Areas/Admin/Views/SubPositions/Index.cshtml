@@ -1,0 +1,106 @@
+﻿@model Overtime.Areas.Admin.ViewModel.SubPositionsIndexVM
+
+
+
+@*<select id="ddlBanks"  name="ddlBanks" ></select>*@
+@Html.DropDownListFor(x => x.SelectedPosition, @Model.Positions, "اختار الوظيفة",
+    new {id = "ddlPosition", @class = " form-control col-xs-3"})
+<a href="@Url.Action("Create", "SubPositions")" class="btn btn-primary btn-lg  pull-left">
+    <i class="fa fa-plus"></i>
+    درجة جديدة
+</a>
+<div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td colspan="4"></td>
+        </tr>
+        <tr>
+            <th> الدرجة </th>
+
+            <th>الوظيفة</th>
+            <th>أنشىء بواسطة</th>
+            <th>عمليات</th>
+
+        </tr>
+
+        </thead>
+
+        <tbody id="myTable">
+
+        <tr class="template">
+            <td class="sub"></td>
+            <td class="name"></td>
+            <td class="createdBy"></td>
+
+
+            <td>
+                <div class="btn-group btn-group-xs  ">
+                    <a class="btn btn-primary btn-edit">
+
+
+                        <span class="fa fa-pencil"></span> تعديل
+                    </a>
+                    <a class="btn btn-danger btn-delete">
+                        <i class="fa fa-remove"></i>
+                        حذف
+                    </a>
+
+                </div>
+
+
+            </td>
+        </tr>
+
+
+        </tbody>
+
+
+    </table>
+
+
+</div>
+
+
+@section script
+{
+    <script>
+
+        $(document).ready(function() {
+            $(".template").hide();
+            $("#ddlPosition").change(function() {
+
+                $("#myTable .cloned").remove();
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: "/admin/SubPositions/GetSubs",
+                    data: { id: $(this).val() },
+                    success: function(data) {
+                        $.each(data, function(i, sub) {
+                            $(".template").clone().show().removeClass("template").addClass("cloned")
+                                .find(".sub").text(sub.Name).end()
+                                .find(".name").text(sub.Position).end()
+                                .find(".createdBy").text(sub.CreatedBy).end()
+                                .find(".btn-edit").attr("href", "/admin/SubPositions/Edit/" + sub.Id).end()
+                                .find(".btn-delete").attr("href", "/admin/SubPositions/Delete/" + sub.Id)
+                                .attr("data-post", "هل تريد حذف " + sub.Name + "?!!").end()
+                                .appendTo($("#myTable"));
+
+
+                        });
+
+
+                    }
+
+                });
+
+
+            });
+
+
+        });
+
+    </script>
+
+}

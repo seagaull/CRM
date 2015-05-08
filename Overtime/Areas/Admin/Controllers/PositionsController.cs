@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Overtime.Areas.Admin.ViewModel;
 using Overtime.Infrastructure;
@@ -13,48 +10,44 @@ namespace Overtime.Areas.Admin.Controllers
     [Authorize(Roles = "admin , moderator")]
     public class PositionsController : Controller
     {
-        OvertimeDbContext _db = new OvertimeDbContext();
         private const int PerPage = 10;
+        private readonly OvertimeDbContext _db = new OvertimeDbContext();
         // GET: Admin/Position
         public ActionResult Index(int page = 1)
         {
             var totalCount = _db.Positions.Count();
-          
-              
+
+
             var positions = _db.Positions
                 .OrderBy(x => x.Name).
                 Skip((page - 1)*PerPage)
-                .Take(PerPage).ToList(); 
+                .Take(PerPage).ToList();
             if (positions == null)
-            return HttpNotFound();
+                return HttpNotFound();
             return View(new PositionsIndexVM
             {
                 Positions = positions,
-                Paggination = new Paggination(totalCount,page,PerPage)
-
-                
+                Paggination = new Paggination(totalCount, page, PerPage)
             });
         }
 
-
         public ActionResult Create()
         {
-
-            return View("Form",new PositionOperationsVM()
+            return View("Form", new PositionOperationsVM
             {
                 IsNew = true
             });
         }
-        public ActionResult Edit(int id )
-        {
 
+        public ActionResult Edit(int id)
+        {
             var position = _db.Positions.Find(id);
 
-            return View("Form", new PositionOperationsVM()
+            return View("Form", new PositionOperationsVM
             {
                 IsNew = false,
                 Id = position.Id,
-              Name = position.Name
+                Name = position.Name
             });
         }
 
@@ -66,7 +59,7 @@ namespace Overtime.Areas.Admin.Controllers
                 return View();
             if (model.IsNew)
             {
-                _db.Positions.Add(new Position()
+                _db.Positions.Add(new Position
                 {
                     Name = model.Name,
                     CreatedTime = DateTime.UtcNow.AddHours(2),
@@ -80,12 +73,9 @@ namespace Overtime.Areas.Admin.Controllers
                     return HttpNotFound();
                 position.Name = model.Name;
                 position.ModifiedTime = DateTime.UtcNow.AddHours(2);
-
-
             }
             _db.SaveChanges();
-            return RedirectToAction("Index","Positions");
-
+            return RedirectToAction("Index", "Positions");
         }
 
         [HttpPost]
@@ -98,6 +88,7 @@ namespace Overtime.Areas.Admin.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         public ActionResult Restore(int id)
         {
@@ -106,7 +97,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             position.DeletedTime = null;
             _db.SaveChanges();
-            return Json(new { trashed = true });
+            return Json(new {trashed = true});
         }
 
         [HttpPost]
@@ -117,7 +108,7 @@ namespace Overtime.Areas.Admin.Controllers
                 HttpNotFound();
             _db.Positions.Remove(position);
             _db.SaveChanges();
-            return Json(new { Success = true });
+            return Json(new {Success = true});
         }
     }
 }

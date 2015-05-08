@@ -1,15 +1,17 @@
 ﻿@model Overtime.Areas.Admin.ViewModel.FormVm
 
 
-<h2><i class="fa fa-stethoscope"></i>  @(Model.IsNew ? "قسم جديد" : "تعديل قسم")</h2>
+<h2>
+    <i class="fa fa-stethoscope"></i> @(Model.IsNew ? "قسم جديد" : "تعديل قسم")
+</h2>
 
 
 @using (Html.BeginForm("Create", "Departments"))
 {
-if (!Model.IsNew)
- {
-     <input name="Id" type="hidden" value="@Model.Id"/>
- }
+    if (!Model.IsNew)
+    {
+        <input name="Id" type="hidden" value="@Model.Id"/>
+    }
     @Html.ValidationSummary()
     <div class=" form-group form-group-sm">
 

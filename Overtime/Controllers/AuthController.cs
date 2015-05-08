@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
 using Overtime.Models;
@@ -12,23 +9,20 @@ namespace Overtime.Controllers
     public class AuthController : Controller
     {
         // GET: Auth
-        OvertimeDbContext _db = new OvertimeDbContext();
+        private readonly OvertimeDbContext _db = new OvertimeDbContext();
+
         public ActionResult Login()
         {
-
-
-            return View(new UserLogin()
-            {
-              
-            });
+            return View(new UserLogin());
         }
+
         [HttpPost]
         public ActionResult Login(UserLogin user, string returnurl)
         {
-            User loguser = _db.Users.SingleOrDefault(x => x.Name == user.Username);
-          
-            if(loguser==null || !(loguser.CheckPassword(user.PasswoedHash)))
-            ModelState.AddModelError("Name","اسم الدخول او كلمة المرور خطأ من فضلك أعد المحاولة");
+            var loguser = _db.Users.SingleOrDefault(x => x.Name == user.Username);
+
+            if (loguser == null || !(loguser.CheckPassword(user.PasswoedHash)))
+                ModelState.AddModelError("Name", "اسم الدخول او كلمة المرور خطأ من فضلك أعد المحاولة");
             if (!ModelState.IsValid)
                 return View(user);
 
@@ -40,7 +34,6 @@ namespace Overtime.Controllers
 
         public ActionResult Logout()
         {
-
             FormsAuthentication.SignOut();
             return RedirectToRoute("home");
         }

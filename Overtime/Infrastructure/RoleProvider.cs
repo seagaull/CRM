@@ -1,27 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using Overtime.Models;
 
 namespace Overtime.Infrastructure
 {
-    public class RoleProvider:System.Web.Security.RoleProvider
+    public class RoleProvider : System.Web.Security.RoleProvider
 
     {
-         OvertimeDbContext db = new OvertimeDbContext();
+        private OvertimeDbContext db = new OvertimeDbContext();
 
+        public override string ApplicationName
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-         public override string[] GetRolesForUser(string username)
-         {
-             return Auth.User.Roles.Select(x => x.Name).ToArray();
-         }
+        public override string[] GetRolesForUser(string username)
+        {
+            return Auth.User.Roles.Select(x => x.Name).ToArray();
+        }
+
         public override bool IsUserInRole(string username, string roleName)
         {
             throw new NotImplementedException();
         }
-
-       
 
         public override void CreateRole(string roleName)
         {
@@ -61,12 +63,6 @@ namespace Overtime.Infrastructure
         public override string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
             throw new NotImplementedException();
-        }
-
-        public override string ApplicationName
-        {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
         }
     }
 }

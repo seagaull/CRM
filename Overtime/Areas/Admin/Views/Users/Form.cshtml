@@ -1,14 +1,16 @@
 ﻿@model Overtime.Areas.Admin.ViewModel.UserForm
 
 
-<h2><i class="fa fa-stethoscope"></i>  @(Model.IsNew ? "مستخدم جديد" : "تعديل مستخدم")</h2>
+<h2>
+    <i class="fa fa-stethoscope"></i> @(Model.IsNew ? "مستخدم جديد" : "تعديل مستخدم")
+</h2>
 
 
 @using (Html.BeginForm("Form", "Users"))
 {
     if (!Model.IsNew)
     {
-        <input name="Id" type="hidden" value="@Model.Id" />
+        <input name="Id" type="hidden" value="@Model.Id"/>
     }
     @Html.ValidationSummary()
 
@@ -20,39 +22,39 @@
     </div>
     <div class="clearfix"></div>
     if (Model.IsNew)
-     {
-         <div class="form-group">
-             @Html.LabelFor(x => x.Password, new {@class = "control-label col-xs-2"})
-             @Html.PasswordFor(x => x.Password, new {@class = "form-control col-xs-5 "})
-
-         </div>
-     }
-    <div class="clearfix"></div>
-        <div class="panel panel-default ">
-            <div class="panel-heading">الصلاحيات</div>
-            <div class="panel-body">
-                <ul class="checkboxEditor">
-                    @for (int i = 0; i < Model.Roles.Count; i++)
-                    {
-                        var role = Model.Roles[i];
-                        <li data-role-id="@role.Id">
-
-                            <a href="#">@role.Name</a>
-                            <input type="hidden" name="Roles[@i].Id" value="@role.Id" />
-                            <input type="hidden" name="Roles[@i].Name" value="@role.Name" />
-                            <input type="hidden" name="Roles[@i].Checked" value="@role.Checked.ToString()" class="selected-input" />
-
-                        </li>
-                    }
-
-
-                </ul>
-            </div>
+    {
+        <div class="form-group">
+            @Html.LabelFor(x => x.Password, new {@class = "control-label col-xs-2"})
+            @Html.PasswordFor(x => x.Password, new {@class = "form-control col-xs-5 "})
 
         </div>
-        <div class="clearfix"></div>
+    }
+    <div class="clearfix"></div>
+    <div class="panel panel-default ">
+        <div class="panel-heading">الصلاحيات</div>
+        <div class="panel-body">
+            <ul class="checkboxEditor">
+                @for (var i = 0; i < Model.Roles.Count; i++)
+                {
+                    var role = Model.Roles[i];
+                    <li data-role-id="@role.Id">
+
+                        <a href="#">@role.Name</a>
+                        <input type="hidden" name="Roles[@i].Id" value="@role.Id"/>
+                        <input type="hidden" name="Roles[@i].Name" value="@role.Name"/>
+                        <input type="hidden" name="Roles[@i].Checked" value="@role.Checked.ToString()" class="selected-input"/>
+
+                    </li>
+                }
+
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="clearfix"></div>
 
     <input type="submit" class="btn btn-success col-lg-offset-2"
-           value="@(Model.IsNew ? "أدخال " : "تعديل")" />
+           value="@(Model.IsNew ? "أدخال " : "تعديل")"/>
     <a href="@Url.Action("index", "Home", new {area = "admin"})">رجوع</a>
 }
